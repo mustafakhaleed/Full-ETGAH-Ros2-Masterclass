@@ -1,0 +1,12 @@
+float32 speed
+float32 pickup_duration
+float32 delivery_duration
+float32 timeout
+---
+bool success
+string message
+---
+string current_phase
+float32 phase_progress
+float32 elapsed_time
+float32 remaining_time
