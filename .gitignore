@@ -1,0 +1,13 @@
+# ROS 2 / colcon auto-generated folders — never commit these
+build/
+install/
+log/
+
+# Python
+__pycache__/
+*.pyc
+
+# Editor/OS junk
+.vscode/
+*.swp
+.DS_Store
