@@ -172,7 +172,7 @@ ros2 launch my_robot_description gazebo.launch.py
 
 ## 10. TF Tree Explanation
 
-![TF Tree](screenshots/tf_tree.png)
+![TF Tree](src/my_robot_description/screenshots/tf_tree.png)
 
 The full TF tree graph (`.gv` + `.pdf`) is also exported in
 `tf_frames/`, generated with:
@@ -202,16 +202,16 @@ The coordinate transforms form a continuous parent-child hierarchy:
 ## 11. Screenshots
 
 ### Robot in RViz
-![Robot in RViz](screenshots/Rviz_robot.png)
+![Robot in RViz](src/my_robot_description/screenshots/Rviz_robot.png)
 
 ### TF Tree
-![TF Tree](screenshots/tf_tree.png)
+![TF Tree](src/my_robot_description/screenshots/tf_tree.png)
 
 ### Robot in Gazebo
-![Robot in Gazebo](screenshots/Gz_Robot.png)
+![Robot in Gazebo](src/my_robot_description/screenshots/Gz_Robot.png)
 
 ### LiDAR Visualization
-![LiDAR Visualization](screenshots/lidar_visualization.png)
+![LiDAR Visualization](src/my_robot_description/screenshots/lidar_visualization.png)
 
 ### Camera Visualization
-![Camera Visualization](screenshots/Camera_view.png)
+![Camera Visualization](src/my_robot_description/screenshots/Camera_view.png)
