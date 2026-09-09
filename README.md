@@ -341,7 +341,7 @@ before screen recording started. After correcting it with another
 back into place), screen recording was started for this video, which
 shows the full localization workflow in Gazebo + RViz2 from that
 point on: the robot moving while localized against the saved map,
-with mapping and localization commands running live in the terminal.
+with localization running live in the terminal.
  
 Partway through the recording, the estimated pose can be seen
 adjusting itself slightly. This is because the corrected pose given
