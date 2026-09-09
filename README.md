@@ -1,217 +1,283 @@
-# task5-robot_description
+# rob_slam — SLAM Mapping & Localization (ROS 2 + slam_toolbox)
 
-A ROS 2 (Jazzy) package containing the complete URDF/Xacro description,
-3D meshes, launch configurations, RViz display profile, and Gazebo Sim
-integration for a custom differential-drive robot equipped with a 2D
-LiDAR and an RGB camera.
+A ROS 2 (Jazzy) package demonstrating full SLAM mapping and
+map-based localization using **slam_toolbox**, tested in Gazebo
+simulation with RViz2 visualization.
 
 ---
 
 ## 1. Project Overview
 
-This package (`my_robot_description`) defines a differential-drive
-mobile robot — two driven wheels, a passive caster wheel, a 2D LiDAR,
-and an RGB camera — modeled entirely in Xacro. It includes everything
-needed to:
+This package contains two complete workflows for the same robot:
 
-- Preview the robot's kinematic structure and TF tree in **RViz2**.
-- Spawn and drive the robot in a full physics simulation in
-  **Gazebo Sim**, bridged to ROS 2 topics via `ros_gz_bridge`.
+- **Mapping** — build an occupancy grid map of the environment from
+  scratch using `slam_toolbox`'s online asynchronous mapping mode.
+- **Localization** — load a previously built map (deserialized from
+  a saved pose graph) and localize the robot within it using laser
+  scan matching, seeded by a manual `2D Pose Estimate` in RViz2.
 
 ---
 
 ## 2. Package Structure
 
 ```
-my_robot_description/
-├── config/
-│   └── gz_bridge.yaml
-├── launch/
-│   ├── display.launch.py
-│   └── gazebo.launch.py
-├── meshes/
-│   ├── Caster_Wheel.stl
-│   ├── lidar.STL
-│   └── zed.stl
-├── rviz/
-│   └── robot_view.rviz
-├── screenshots/
-│   ├── Camera_view.png
-│   ├── Gz_Robot.png
-│   ├── lidar_visualization.png
-│   ├── Rviz_robot.png
-│   └── tf_tree.png
-├── tf_frames/
-│   ├── frames_<timestamp>.gv
-│   └── frames_<timestamp>.pdf
-├── urdf/
-│   ├── robot.urdf.xacro
-│   └── robot.gazebo.xacro
-├── CMakeLists.txt
-├── package.xml
-└── README.md
+ET_ASS6_ws/
+├── README.md
+└── src/
+    └── rob_slam/
+        ├── config/
+        │   ├── mapper_params_online_async.yaml
+        │   └── slam_localization.yaml
+        ├── launch/
+        │   ├── online_async_launch.py
+        │   └── slam_localization.launch.py
+        ├── map/
+        │   ├── .yaml
+        │   ├── .pgm
+        │   └── map.png
+        ├── posegraph/
+        │   ├── my_posegraph.data
+        │   └── my_posegraph.posegraph
+        ├── rviz/
+        │   └── map.rviz
+        ├── screenshots_and_DemoVid/
+        │   ├── wrong_2D-estimate_pose.png
+        │   ├── Right_2D-estimate_pose.png
+        │   ├── Tf_tree.png
+        │   └── Localization_demo.mp4
+        ├── include/
+        ├── src/
+        ├── CMakeLists.txt
+        └── package.xml
 ```
+
+**Note on `map/`:** the saved map's `.yaml` and `.pgm` files have no
+base filename (just the extension), which makes them dot-files ---
+`ls` alone will not show them. Use `ls -la` to list the folder, or
+open it in VS Code's file explorer, which shows dot-files by default.
 
 ---
 
 ## 3. Prerequisites
 
 ```bash
-sudo apt install ros-jazzy-xacro \
-                  ros-jazzy-robot-state-publisher \
-                  ros-jazzy-joint-state-publisher-gui \
+sudo apt install ros-jazzy-slam-toolbox \
+                  ros-jazzy-nav2-map-server \
                   ros-jazzy-rviz2 \
                   ros-jazzy-ros-gz-sim \
-                  ros-jazzy-ros-gz-bridge \
-                  ros-jazzy-teleop-twist-keyboard
+                  ros-jazzy-ros-gz-bridge
 ```
 
 ---
 
-## 4. Linux Commands Used
+## 4. Step-by-Step Setup & Usage
 
-**Workspace setup & build**
+### 4.1 Build the workspace
 
 ```bash
-# Navigate to workspace and clean prior build artifacts
 cd ~/Downloads/ET_ASS6_ws
 rm -rf build/ install/ log/
-
-# Build package using symlink installation
-colcon build --symlink-install --packages-select my_robot_description
-
-# Source workspace environment
+colcon build --symlink-install --packages-select rob_slam
 source install/setup.bash
 ```
 
-
-## 5. ROS 2 Commands Used
-
-**Source environment**
+### 4.2 Run mapping (build a new map from scratch)
 
 ```bash
-source /opt/ros/$ROS_DISTRO/setup.bash
-source install/setup.bash
+ros2 launch rob_slam online_async_launch.py
 ```
 
-**Topic inspection & monitoring**
+Drive the robot around the environment (e.g.\ with
+`teleop_twist_keyboard`) until the map is fully explored.
+
+### 4.3 Save the finished map
 
 ```bash
-ros2 topic list
-ros2 topic echo /cmd_vel
-ros2 topic echo /joint_states
+cd src/rob_slam
+ros2 run nav2_map_server map_saver_cli -f map/turtlebot3_world_map
 ```
 
-**Manual velocity command**
+This is intended to produce `turtlebot3_world_map.yaml` and
+`turtlebot3_world_map.pgm`. In this repository it instead produced
+`.yaml` and `.pgm` (no base filename) --- see the note under
+Section 2 for how to view them.
+
+### 4.4 Save the pose graph
 
 ```bash
-ros2 topic pub -r 10 /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.2}, angular: {z: 0.1}}"
+ros2 service call /slam_toolbox/serialize_map slam_toolbox/srv/SerializePoseGraph "{filename: 'posegraph/my_posegraph'}"
+```
+
+Produces `my_posegraph.data` and `my_posegraph.posegraph`.
+
+### 4.5 Run localization (using the saved map)
+
+```bash
+ros2 launch rob_slam slam_localization.launch.py
+```
+
+In RViz2, use the **2D Pose Estimate** tool to give the robot's
+approximate starting position and orientation on the map, matching
+what the live laser scan shows relative to the map's walls.
+
+---
+
+## 5. How to Test the Nodes
+
+```bash
+ros2 node list          # confirm slam_toolbox, robot_state_publisher, etc. are running
+ros2 topic list         # confirm /map, /odom, /scan, /tf, /tf_static are publishing
+ros2 topic echo /odom   # confirm live odometry values are updating
+ros2 run tf2_tools view_frames   # confirm the full TF tree is connected
 ```
 
 ---
 
-## 6. How to Launch RViz
+## 6. Expected Output
 
-To visualize the URDF model, frames, and TF tree standalone in RViz:
+- **Mapping mode:** an occupancy grid growing on `/map` as the robot
+  explores, visible in RViz2.
+- **Localization mode:** the robot's laser scan aligning with the
+  walls of the previously saved map, once given a correct initial
+  pose estimate.
+- **TF tree:** a single connected chain,
+  `map → odom → base_footprint → base_link → ...`.
 
-```bash
-ros2 launch my_robot_description display.launch.py
+---
+
+## 7. Initial Pose Estimate: Wrong vs.\ Correct
+
+Giving `slam_toolbox` (in localization mode) a wrong initial pose
+estimate does **not** self-correct on its own — unlike AMCL's global
+particle filter, this localization mode performs local scan matching
+around the seeded pose only. A pose estimate that is significantly
+off causes the live laser scan to visibly disagree with the map's
+walls, and the live (in-memory) map can visibly degrade as
+mismatched scan data gets inserted into it.
+
+### Wrong Initial Pose
+
+![Wrong Initial Pose](src/rob_slam/screenshots_and_DemoVid/wrong_2D-estimate_pose.png)
+
+**Observation:** the laser scan did not align with the map's walls;
+the live map began to distort as incorrect scan data was matched
+against the wrong location.
+
+### Correct Initial Pose
+
+![Correct Initial Pose](src/rob_slam/screenshots_and_DemoVid/Right_2D-estimate_pose.png)
+
+**Observation:** after re-issuing an accurate `2D Pose Estimate`
+(visually matched against the map before confirming), the laser scan
+aligned correctly with the map's walls and localization stabilized.
+
+**Note:** the wrong pose above was corrected with another `2D Pose
+Estimate` before the demo video (Section 10) recording began. The
+video itself starts from that corrected state, and shows a further
+moment of the estimate self-adjusting slightly — see Section 10 for
+why that is expected and different from the wrong-pose failure shown
+here.
+
+---
+
+## 8. TF Tree
+
+![TF Tree](src/rob_slam/screenshots_and_DemoVid/Tf_tree.png)
+
+The tree is rooted at `map`, published by `slam_toolbox` in
+localization mode, down through `odom` (continuous odometry) and
+`base_footprint`/`base_link` (the robot's own kinematic chain).
+
+---
+
+## 9. `/odom` Topic Output
+
+Sample output of `ros2 topic echo /odom` during localization:
+
+```yaml
+header:
+  stamp:
+    sec: 2548
+    nanosec: 360000000
+  frame_id: odom
+child_frame_id: base_footprint
+pose:
+  pose:
+    position:
+      x: -0.15889103758363365
+      y: -2.4164165663678188
+      z: 0.0
+    orientation:
+      x: 0.0
+      y: 0.0
+      z: -0.2687924075224633
+      w: 0.9631981320882418
+  covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+               0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+               0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+               0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+               0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+               0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+twist:
+  twist:
+    linear: {x: 0.0, y: 0.0, z: 0.0}
+    angular: {x: 0.0, y: 0.0, z: 0.0}
+  covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+               0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+               0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+               0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+               0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+               0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+---
+header:
+  stamp:
+    sec: 2548
+    nanosec: 370000000
+  frame_id: odom
+child_frame_id: base_footprint
+pose:
+  pose:
+    position:
+      x: -0.15889103758363365
+      y: -2.4164165663678188
+      z: 0.0
+    orientation:
+      x: 0.0
+      y: 0.0
+      z: -0.2687924075224633
+      w: 0.9631981320882418
 ```
 
 ---
 
-## 7. How to Launch Gazebo
+## 10. Demo Video
 
-To spawn the robot and load the Gazebo simulation environment:
+[Demo Video](src/rob_slam/screenshots_and_DemoVid/Localization_demo.mp4)
 
-```bash
-ros2 launch my_robot_description gazebo.launch.py
-```
+The wrong initial pose (Section 7) was captured as a screenshot only,
+before screen recording started. After correcting it with another
+`2D Pose Estimate` in RViz2 (the robot's estimated position snapping
+back into place), screen recording was started for this video, which
+shows the full localization workflow in Gazebo + RViz2 from that
+point on: the robot moving while localized against the saved map.
 
----
-
-## 8. Expected Topics
-
-| Topic | Type | Description |
-|---|---|---|
-| `/cmd_vel` | `geometry_msgs/msg/Twist` | Velocity commands controlling robot motion |
-| `/odom` | `nav_msgs/msg/Odometry` | Raw odometry calculated by the differential drive system |
-| `/joint_states` | `sensor_msgs/msg/JointState` | Active joint positions for wheels and caster assembly |
-| `/tf` & `/tf_static` | `tf2_msgs/msg/TFMessage` | Dynamic and static coordinate transforms across all frames |
-| `/scan` | `sensor_msgs/msg/LaserScan` | 2D LiDAR range scan measurement data |
-| `/camera/image_raw` | `sensor_msgs/msg/Image` | Uncompressed RGB camera stream |
-| `/camera/camera_info` | `sensor_msgs/msg/CameraInfo` | Camera intrinsic calibration properties |
+Partway through the recording, the estimated pose can be seen
+adjusting itself slightly. This is because the corrected pose given
+beforehand, while close, was not perfectly exact — it was still
+within the scan matcher's local correction range, so it refined
+itself into full alignment during the recording. This is distinct
+from the wrong-pose case in Section 7, where the error was large
+enough that no self-correction occurred at all.
 
 ---
 
-## 9. How to Move the Robot
+## 11. Notes
 
-1. Launch the Gazebo simulation:
-
-   ```bash
-   ros2 launch my_robot_description gazebo.launch.py
-   ```
-
-2. In a new terminal, run the teleoperation node:
-
-   ```bash
-   ros2 run teleop_twist_keyboard teleop_twist_keyboard
-   ```
-
-3. Drive the robot using the keyboard:
-
-   | Key | Action |
-   |---|---|
-   | `i` | Forward |
-   | `,` | Backward |
-   | `j` | Turn left |
-   | `l` | Turn right |
-   | `k` | Stop |
-
----
-
-## 10. TF Tree Explanation
-
-![TF Tree](screenshots/tf_tree.png)
-
-The full TF tree graph (`.gv` + `.pdf`) is also exported in
-`tf_frames/`, generated with:
-
-```bash
-ros2 run tf2_tools view_frames
-```
-
-The coordinate transforms form a continuous parent-child hierarchy:
-
-- **`odom` → `base_footprint`** — dynamic transform published by
-  Gazebo's DiffDrive plugin, tracking the robot's pose in the world.
-- **`base_footprint` → `base_link`** — static transform placing
-  `base_link` at its physical ground-clearance height.
-- **`base_link` → `left_wheel` / `right_wheel`** — continuous joints
-  driven by the differential-drive velocity controller.
-- **`base_link` → `caster_swivel_link` → `caster_wheel`** — dynamic
-  joint chain enabling free passive swivel and rolling motion.
-- **`base_link` → `lidar_link`** — fixed transform specifying the
-  sensor's offset on top of the chassis.
-- **`base_link` → `camera_link` → `camera_optical_link`** — fixed
-  transforms setting the optical-frame convention (Z forward, X right,
-  Y down).
-
----
-
-## 11. Screenshots
-
-### Robot in RViz
-![Robot in RViz](screenshots/Rviz_robot.png)
-
-### TF Tree
-![TF Tree](screenshots/tf_tree.png)
-
-### Robot in Gazebo
-![Robot in Gazebo](screenshots/Gz_Robot.png)
-
-### LiDAR Visualization
-![LiDAR Visualization](screenshots/lidar_visualization.png)
-
-### Camera Visualization
-![Camera Visualization](screenshots/Camera_view.png)
+- The pose graph files in `posegraph/` were serialized once, right
+  after mapping was completed, and were not overwritten during any
+  later localization session — they remain the clean, original map
+  data.
+- If localization ever needs to be reset to this clean state,
+  restart `slam_localization.launch.py`: it re-deserializes the map
+  from `posegraph/` on every launch, discarding any corrupted
+  in-memory state from a previous bad pose estimate.

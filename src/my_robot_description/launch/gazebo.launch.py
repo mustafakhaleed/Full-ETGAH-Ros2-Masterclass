@@ -35,10 +35,13 @@ def generate_launch_description():
 
     robot_description = xacro.process_file(xacro_file).toxml()
 
+    # Pass the parent directory so gz-sim resolves package://my_robot_description/...
+    parent_share_dir = os.path.abspath(os.path.join(pkg_share, '..'))
+
     gazebo_resource_path = SetEnvironmentVariable(
         name='GZ_SIM_RESOURCE_PATH',
         value=':'.join([
-            os.path.dirname(pkg_share),
+            parent_share_dir,
             turtlebot3_gazebo_share
         ])
     )
@@ -67,15 +70,16 @@ def generate_launch_description():
         ]
     )
 
+    # MATCH THE ROBOT NAME EXACTLY WITH YOUR URDF ('Eissa')
     spawn_robot = Node(
         package='ros_gz_sim',
         executable='create',
         arguments=[
             '-topic', 'robot_description',
-            '-name', 'two_wheel_robot',
+            '-name', 'Eissa',
             '-x', '-2.0',
             '-y', '0.5',
-            '-z', '0.0',
+            '-z', '0.1',
             '-R', '0.0',
             '-P', '0.0',
             '-Y', '1.57'
