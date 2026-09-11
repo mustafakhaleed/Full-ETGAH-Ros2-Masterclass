@@ -1,0 +1,64 @@
+[0.022s] Invoking command in '/home/mostafa/Downloads/amcl_ws/build/amcl_loc': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/mostafa/Downloads/amcl_ws/src/amcl_loc -DCMAKE_INSTALL_PREFIX=/home/mostafa/Downloads/amcl_ws/install/amcl_loc
+[0.141s] -- The C compiler identification is GNU 13.3.0
+[0.229s] -- The CXX compiler identification is GNU 13.3.0
+[0.256s] -- Detecting C compiler ABI info
+[0.389s] -- Detecting C compiler ABI info - done
+[0.404s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.404s] -- Detecting C compile features
+[0.405s] -- Detecting C compile features - done
+[0.417s] -- Detecting CXX compiler ABI info
+[0.560s] -- Detecting CXX compiler ABI info - done
+[0.577s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.577s] -- Detecting CXX compile features
+[0.577s] -- Detecting CXX compile features - done
+[0.589s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[0.817s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[0.998s] -- Found rclcpp: 28.1.21 (/opt/ros/jazzy/share/rclcpp/cmake)
+[1.078s] -- Found rosidl_generator_c: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[1.114s] -- Found rosidl_generator_cpp: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[1.174s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.243s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.389s] -- Found rmw_implementation_cmake: 7.3.3 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+[1.396s] -- Found rmw_fastrtps_cpp: 8.4.4 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+[1.589s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.13")  
+[1.626s] -- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+[1.663s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.830s] -- Found rclpy: 7.1.11 (/opt/ros/jazzy/share/rclpy/cmake)
+[1.834s] -- Found std_msgs: 5.3.8 (/opt/ros/jazzy/share/std_msgs/cmake)
+[1.860s] -- Found ament_lint_auto: 0.17.5 (/opt/ros/jazzy/share/ament_lint_auto/cmake)
+[2.041s] -- Added test 'flake8' to check Python code syntax and style conventions
+[2.041s] -- Configured 'flake8' exclude dirs and/or files: 
+[2.042s] -- Added test 'lint_cmake' to check CMake code style
+[2.043s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[2.045s] -- Added test 'xmllint' to check XML markup files
+[2.049s] -- Configuring done (2.0s)
+[2.054s] -- Generating done (0.0s)
+[2.060s] -- Build files have been written to: /home/mostafa/Downloads/amcl_ws/build/amcl_loc
+[2.080s] Invoked command in '/home/mostafa/Downloads/amcl_ws/build/amcl_loc' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/mostafa/Downloads/amcl_ws/src/amcl_loc -DCMAKE_INSTALL_PREFIX=/home/mostafa/Downloads/amcl_ws/install/amcl_loc
+[2.081s] Invoking command in '/home/mostafa/Downloads/amcl_ws/build/amcl_loc': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/mostafa/Downloads/amcl_ws/build/amcl_loc -- -j12 -l12
+[2.174s] Invoked command in '/home/mostafa/Downloads/amcl_ws/build/amcl_loc' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/mostafa/Downloads/amcl_ws/build/amcl_loc -- -j12 -l12
+[2.197s] Invoking command in '/home/mostafa/Downloads/amcl_ws/build/amcl_loc': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/mostafa/Downloads/amcl_ws/build/amcl_loc
+[2.221s] -- Install configuration: ""
+[2.222s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/amcl_loc/share/amcl_loc//launch
+[2.222s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/amcl_loc/share/amcl_loc//launch/amcl.launch.py
+[2.222s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/amcl_loc/share/amcl_loc//config
+[2.222s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/amcl_loc/share/amcl_loc//config/amcl.yaml
+[2.222s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/amcl_loc/share/amcl_loc//map
+[2.222s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/amcl_loc/share/amcl_loc//map/my_map.yaml
+[2.222s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/amcl_loc/share/amcl_loc//map/my_map.pgm
+[2.223s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/amcl_loc/share/ament_index/resource_index/package_run_dependencies/amcl_loc
+[2.223s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/amcl_loc/share/ament_index/resource_index/parent_prefix_path/amcl_loc
+[2.223s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/amcl_loc/share/amcl_loc/environment/ament_prefix_path.sh
+[2.224s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/amcl_loc/share/amcl_loc/environment/ament_prefix_path.dsv
+[2.224s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/amcl_loc/share/amcl_loc/environment/path.sh
+[2.224s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/amcl_loc/share/amcl_loc/environment/path.dsv
+[2.224s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/amcl_loc/share/amcl_loc/local_setup.bash
+[2.227s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/amcl_loc/share/amcl_loc/local_setup.sh
+[2.229s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/amcl_loc/share/amcl_loc/local_setup.zsh
+[2.229s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/amcl_loc/share/amcl_loc/local_setup.dsv
+[2.229s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/amcl_loc/share/amcl_loc/package.dsv
+[2.230s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/amcl_loc/share/ament_index/resource_index/packages/amcl_loc
+[2.230s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/amcl_loc/share/amcl_loc/cmake/amcl_locConfig.cmake
+[2.230s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/amcl_loc/share/amcl_loc/cmake/amcl_locConfig-version.cmake
+[2.231s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/amcl_loc/share/amcl_loc/package.xml
+[2.234s] Invoked command in '/home/mostafa/Downloads/amcl_ws/build/amcl_loc' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/mostafa/Downloads/amcl_ws/build/amcl_loc

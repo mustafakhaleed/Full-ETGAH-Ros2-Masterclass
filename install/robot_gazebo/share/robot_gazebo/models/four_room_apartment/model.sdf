@@ -1,0 +1,477 @@
+<?xml version="1.0"?>
+<sdf version="1.8">
+  <model name="apartment_4rooms">
+    <static>true</static>
+    <pose>0 0 0 0 0 0</pose>
+
+    <link name="building_link">
+      <pose>0 0 0 0 0 0</pose>
+
+      <collision name="front_wall_a_collision">
+        <pose>-2.75 -4.5 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>4.5 0.2 3.0</size></box>
+        </geometry>
+      </collision>
+      <visual name="front_wall_a_visual">
+        <pose>-2.75 -4.5 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>4.5 0.2 3.0</size></box>
+        </geometry>
+        <material><diffuse>0.85 0.83 0.78 1.0</diffuse></material>
+      </visual>
+
+      <collision name="front_wall_b_collision">
+        <pose>2.75 -4.5 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>4.5 0.2 3.0</size></box>
+        </geometry>
+      </collision>
+      <visual name="front_wall_b_visual">
+        <pose>2.75 -4.5 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>4.5 0.2 3.0</size></box>
+        </geometry>
+        <material><diffuse>0.85 0.83 0.78 1.0</diffuse></material>
+      </visual>
+
+      <collision name="back_wall_a_collision">
+        <pose>-3 4.5 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>4 0.2 3.0</size></box>
+        </geometry>
+      </collision>
+      <visual name="back_wall_a_visual">
+        <pose>-3 4.5 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>4 0.2 3.0</size></box>
+        </geometry>
+        <material><diffuse>0.85 0.83 0.78 1.0</diffuse></material>
+      </visual>
+
+      <collision name="back_wall_b_collision">
+        <pose>3 4.5 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>4 0.2 3.0</size></box>
+        </geometry>
+      </collision>
+      <visual name="back_wall_b_visual">
+        <pose>3 4.5 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>4 0.2 3.0</size></box>
+        </geometry>
+        <material><diffuse>0.85 0.83 0.78 1.0</diffuse></material>
+      </visual>
+
+      <collision name="back_wall_lintel_collision">
+        <pose>0 4.5 2.6 0 0 0</pose>
+        <geometry>
+          <box><size>2 0.2 0.8</size></box>
+        </geometry>
+      </collision>
+      <visual name="back_wall_lintel_visual">
+        <pose>0 4.5 2.6 0 0 0</pose>
+        <geometry>
+          <box><size>2 0.2 0.8</size></box>
+        </geometry>
+        <material><diffuse>0.85 0.83 0.78 1.0</diffuse></material>
+      </visual>
+
+      <collision name="left_wall_a_collision">
+        <pose>-5 -2.75 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>0.2 3.5 3.0</size></box>
+        </geometry>
+      </collision>
+      <visual name="left_wall_a_visual">
+        <pose>-5 -2.75 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>0.2 3.5 3.0</size></box>
+        </geometry>
+        <material><diffuse>0.85 0.83 0.78 1.0</diffuse></material>
+      </visual>
+
+      <collision name="left_wall_b_collision">
+        <pose>-5 2.75 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>0.2 3.5 3.0</size></box>
+        </geometry>
+      </collision>
+      <visual name="left_wall_b_visual">
+        <pose>-5 2.75 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>0.2 3.5 3.0</size></box>
+        </geometry>
+        <material><diffuse>0.85 0.83 0.78 1.0</diffuse></material>
+      </visual>
+
+      <collision name="left_wall_sill_collision">
+        <pose>-5 0 0.45 0 0 0</pose>
+        <geometry>
+          <box><size>0.2 2 0.9</size></box>
+        </geometry>
+      </collision>
+      <visual name="left_wall_sill_visual">
+        <pose>-5 0 0.45 0 0 0</pose>
+        <geometry>
+          <box><size>0.2 2 0.9</size></box>
+        </geometry>
+        <material><diffuse>0.85 0.83 0.78 1.0</diffuse></material>
+      </visual>
+
+      <collision name="left_wall_lintel_collision">
+        <pose>-5 0 2.55 0 0 0</pose>
+        <geometry>
+          <box><size>0.2 2 0.9</size></box>
+        </geometry>
+      </collision>
+      <visual name="left_wall_lintel_visual">
+        <pose>-5 0 2.55 0 0 0</pose>
+        <geometry>
+          <box><size>0.2 2 0.9</size></box>
+        </geometry>
+        <material><diffuse>0.85 0.83 0.78 1.0</diffuse></material>
+      </visual>
+
+      <collision name="right_wall_a_collision">
+        <pose>5 -2.75 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>0.2 3.5 3.0</size></box>
+        </geometry>
+      </collision>
+      <visual name="right_wall_a_visual">
+        <pose>5 -2.75 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>0.2 3.5 3.0</size></box>
+        </geometry>
+        <material><diffuse>0.85 0.83 0.78 1.0</diffuse></material>
+      </visual>
+
+      <collision name="right_wall_b_collision">
+        <pose>5 2.75 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>0.2 3.5 3.0</size></box>
+        </geometry>
+      </collision>
+      <visual name="right_wall_b_visual">
+        <pose>5 2.75 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>0.2 3.5 3.0</size></box>
+        </geometry>
+        <material><diffuse>0.85 0.83 0.78 1.0</diffuse></material>
+      </visual>
+
+      <collision name="right_wall_sill_collision">
+        <pose>5 0 0.45 0 0 0</pose>
+        <geometry>
+          <box><size>0.2 2 0.9</size></box>
+        </geometry>
+      </collision>
+      <visual name="right_wall_sill_visual">
+        <pose>5 0 0.45 0 0 0</pose>
+        <geometry>
+          <box><size>0.2 2 0.9</size></box>
+        </geometry>
+        <material><diffuse>0.85 0.83 0.78 1.0</diffuse></material>
+      </visual>
+
+      <collision name="right_wall_lintel_collision">
+        <pose>5 0 2.55 0 0 0</pose>
+        <geometry>
+          <box><size>0.2 2 0.9</size></box>
+        </geometry>
+      </collision>
+      <visual name="right_wall_lintel_visual">
+        <pose>5 0 2.55 0 0 0</pose>
+        <geometry>
+          <box><size>0.2 2 0.9</size></box>
+        </geometry>
+        <material><diffuse>0.85 0.83 0.78 1.0</diffuse></material>
+      </visual>
+
+      <!-- Balcony floor: leveled with the room floor (z = 0) instead of
+           raised 0.1m above it, so there is no step/threshold for the
+           robot to cross when driving from the room onto the balcony. -->
+      <collision name="balcony_floor_collision">
+        <pose>1 5.5 -0.05 0 0 0</pose>
+        <geometry>
+          <box><size>4 2 0.1</size></box>
+        </geometry>
+      </collision>
+      <visual name="balcony_floor_visual">
+        <pose>1 5.5 -0.05 0 0 0</pose>
+        <geometry>
+          <box><size>4 2 0.1</size></box>
+        </geometry>
+        <material><diffuse>0.55 0.55 0.55 1.0</diffuse></material>
+      </visual>
+
+      <collision name="balcony_rail_outer_collision">
+        <pose>1 6.5 0.5 0 0 0</pose>
+        <geometry>
+          <box><size>4 0.1 1.0</size></box>
+        </geometry>
+      </collision>
+      <visual name="balcony_rail_outer_visual">
+        <pose>1 6.5 0.5 0 0 0</pose>
+        <geometry>
+          <box><size>4 0.1 1.0</size></box>
+        </geometry>
+        <material><diffuse>0.55 0.55 0.55 1.0</diffuse></material>
+      </visual>
+
+      <collision name="balcony_rail_left_collision">
+        <pose>-1 5.5 0.5 0 0 0</pose>
+        <geometry>
+          <box><size>0.1 2 1.0</size></box>
+        </geometry>
+      </collision>
+      <visual name="balcony_rail_left_visual">
+        <pose>-1 5.5 0.5 0 0 0</pose>
+        <geometry>
+          <box><size>0.1 2 1.0</size></box>
+        </geometry>
+        <material><diffuse>0.55 0.55 0.55 1.0</diffuse></material>
+      </visual>
+
+      <collision name="balcony_rail_right_collision">
+        <pose>3 5.5 0.5 0 0 0</pose>
+        <geometry>
+          <box><size>0.1 2 1.0</size></box>
+        </geometry>
+      </collision>
+      <visual name="balcony_rail_right_visual">
+        <pose>3 5.5 0.5 0 0 0</pose>
+        <geometry>
+          <box><size>0.1 2 1.0</size></box>
+        </geometry>
+        <material><diffuse>0.55 0.55 0.55 1.0</diffuse></material>
+      </visual>
+
+      <collision name="int_v_1_collision">
+        <pose>1 -3.5 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>0.2 2 3.0</size></box>
+        </geometry>
+      </collision>
+      <visual name="int_v_1_visual">
+        <pose>1 -3.5 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>0.2 2 3.0</size></box>
+        </geometry>
+        <material><diffuse>0.75 0.72 0.65 1.0</diffuse></material>
+      </visual>
+
+      <collision name="int_v_2_collision">
+        <pose>1 0 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>0.2 3 3.0</size></box>
+        </geometry>
+      </collision>
+      <visual name="int_v_2_visual">
+        <pose>1 0 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>0.2 3 3.0</size></box>
+        </geometry>
+        <material><diffuse>0.75 0.72 0.65 1.0</diffuse></material>
+      </visual>
+
+      <collision name="int_v_3_collision">
+        <pose>1 3.5 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>0.2 2 3.0</size></box>
+        </geometry>
+      </collision>
+      <visual name="int_v_3_visual">
+        <pose>1 3.5 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>0.2 2 3.0</size></box>
+        </geometry>
+        <material><diffuse>0.75 0.72 0.65 1.0</diffuse></material>
+      </visual>
+
+      <collision name="int_h_1_collision">
+        <pose>-3.75 0 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>2.5 0.2 3.0</size></box>
+        </geometry>
+      </collision>
+      <visual name="int_h_1_visual">
+        <pose>-3.75 0 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>2.5 0.2 3.0</size></box>
+        </geometry>
+        <material><diffuse>0.75 0.72 0.65 1.0</diffuse></material>
+      </visual>
+
+      <collision name="int_h_2_collision">
+        <pose>0 0 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>3 0.2 3.0</size></box>
+        </geometry>
+      </collision>
+      <visual name="int_h_2_visual">
+        <pose>0 0 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>3 0.2 3.0</size></box>
+        </geometry>
+        <material><diffuse>0.75 0.72 0.65 1.0</diffuse></material>
+      </visual>
+
+      <collision name="int_h_3_collision">
+        <pose>3.75 0 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>2.5 0.2 3.0</size></box>
+        </geometry>
+      </collision>
+      <visual name="int_h_3_visual">
+        <pose>3.75 0 1.5 0 0 0</pose>
+        <geometry>
+          <box><size>2.5 0.2 3.0</size></box>
+        </geometry>
+        <material><diffuse>0.75 0.72 0.65 1.0</diffuse></material>
+      </visual>
+
+      <collision name="sofa_collision">
+        <pose>-4.0 -0.6 0.4 0 0 0</pose>
+        <geometry>
+          <box><size>1.8 0.7 0.8</size></box>
+        </geometry>
+      </collision>
+      <visual name="sofa_visual">
+        <pose>-4.0 -0.6 0.4 0 0 0</pose>
+        <geometry>
+          <box><size>1.8 0.7 0.8</size></box>
+        </geometry>
+        <material><diffuse>0.25 0.3 0.55 1.0</diffuse></material>
+      </visual>
+
+      <collision name="coffee_table_collision">
+        <pose>-2.3 -2.0 0.25 0 0 0</pose>
+        <geometry>
+          <box><size>1.0 0.5 0.5</size></box>
+        </geometry>
+      </collision>
+      <visual name="coffee_table_visual">
+        <pose>-2.3 -2.0 0.25 0 0 0</pose>
+        <geometry>
+          <box><size>1.0 0.5 0.5</size></box>
+        </geometry>
+        <material><diffuse>0.4 0.25 0.15 1.0</diffuse></material>
+      </visual>
+
+      <collision name="side_table_collision">
+        <pose>-0.6 -3.8 0.3 0 0 0</pose>
+        <geometry>
+          <cylinder><radius>0.25</radius><length>0.6</length></cylinder>
+        </geometry>
+      </collision>
+      <visual name="side_table_visual">
+        <pose>-0.6 -3.8 0.3 0 0 0</pose>
+        <geometry>
+          <cylinder><radius>0.25</radius><length>0.6</length></cylinder>
+        </geometry>
+        <material><diffuse>0.35 0.22 0.12 1.0</diffuse></material>
+      </visual>
+
+      <collision name="bed_collision">
+        <pose>-3.5 3.3 0.3 0 0 0</pose>
+        <geometry>
+          <box><size>1.8 2.1 0.6</size></box>
+        </geometry>
+      </collision>
+      <visual name="bed_visual">
+        <pose>-3.5 3.3 0.3 0 0 0</pose>
+        <geometry>
+          <box><size>1.8 2.1 0.6</size></box>
+        </geometry>
+        <material><diffuse>0.7 0.7 0.8 1.0</diffuse></material>
+      </visual>
+
+      <collision name="wardrobe_collision">
+        <pose>-0.6 3.9 0.9 0 0 0</pose>
+        <geometry>
+          <box><size>0.6 0.9 1.8</size></box>
+        </geometry>
+      </collision>
+      <visual name="wardrobe_visual">
+        <pose>-0.6 3.9 0.9 0 0 0</pose>
+        <geometry>
+          <box><size>0.6 0.9 1.8</size></box>
+        </geometry>
+        <material><diffuse>0.45 0.3 0.2 1.0</diffuse></material>
+      </visual>
+
+      <collision name="kitchen_counter_collision">
+        <pose>4.3 3.3 0.45 0 0 0</pose>
+        <geometry>
+          <box><size>0.6 2.0 0.9</size></box>
+        </geometry>
+      </collision>
+      <visual name="kitchen_counter_visual">
+        <pose>4.3 3.3 0.45 0 0 0</pose>
+        <geometry>
+          <box><size>0.6 2.0 0.9</size></box>
+        </geometry>
+        <material><diffuse>0.8 0.8 0.82 1.0</diffuse></material>
+      </visual>
+
+      <collision name="fridge_collision">
+        <pose>1.7 4.0 0.9 0 0 0</pose>
+        <geometry>
+          <box><size>0.6 0.6 1.8</size></box>
+        </geometry>
+      </collision>
+      <visual name="fridge_visual">
+        <pose>1.7 4.0 0.9 0 0 0</pose>
+        <geometry>
+          <box><size>0.6 0.6 1.8</size></box>
+        </geometry>
+        <material><diffuse>0.9 0.9 0.92 1.0</diffuse></material>
+      </visual>
+
+      <collision name="kitchen_table_collision">
+        <pose>3.0 1.3 0.4 0 0 0</pose>
+        <geometry>
+          <cylinder><radius>0.45</radius><length>0.8</length></cylinder>
+        </geometry>
+      </collision>
+      <visual name="kitchen_table_visual">
+        <pose>3.0 1.3 0.4 0 0 0</pose>
+        <geometry>
+          <cylinder><radius>0.45</radius><length>0.8</length></cylinder>
+        </geometry>
+        <material><diffuse>0.6 0.45 0.3 1.0</diffuse></material>
+      </visual>
+
+      <collision name="bathtub_collision">
+        <pose>4.0 -3.6 0.25 0 0 0</pose>
+        <geometry>
+          <box><size>1.5 0.7 0.5</size></box>
+        </geometry>
+      </collision>
+      <visual name="bathtub_visual">
+        <pose>4.0 -3.6 0.25 0 0 0</pose>
+        <geometry>
+          <box><size>1.5 0.7 0.5</size></box>
+        </geometry>
+        <material><diffuse>0.85 0.87 0.9 1.0</diffuse></material>
+      </visual>
+
+      <collision name="sink_collision">
+        <pose>1.8 -1.4 0.45 0 0 0</pose>
+        <geometry>
+          <cylinder><radius>0.25</radius><length>0.9</length></cylinder>
+        </geometry>
+      </collision>
+      <visual name="sink_visual">
+        <pose>1.8 -1.4 0.45 0 0 0</pose>
+        <geometry>
+          <cylinder><radius>0.25</radius><length>0.9</length></cylinder>
+        </geometry>
+        <material><diffuse>0.88 0.88 0.9 1.0</diffuse></material>
+      </visual>
+
+    </link>
+  </model>
+</sdf>

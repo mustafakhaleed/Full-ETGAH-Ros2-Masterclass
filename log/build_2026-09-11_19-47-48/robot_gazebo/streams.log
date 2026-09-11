@@ -1,0 +1,75 @@
+[0.017s] Invoking command in '/home/mostafa/Downloads/amcl_ws/build/robot_gazebo': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/mostafa/Downloads/amcl_ws/src/robot_gazebo -DCMAKE_INSTALL_PREFIX=/home/mostafa/Downloads/amcl_ws/install/robot_gazebo
+[0.134s] -- The C compiler identification is GNU 13.3.0
+[0.226s] -- The CXX compiler identification is GNU 13.3.0
+[0.253s] -- Detecting C compiler ABI info
+[0.376s] -- Detecting C compiler ABI info - done
+[0.394s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.395s] -- Detecting C compile features
+[0.396s] -- Detecting C compile features - done
+[0.410s] -- Detecting CXX compiler ABI info
+[0.569s] -- Detecting CXX compiler ABI info - done
+[0.582s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.585s] -- Detecting CXX compile features
+[0.585s] -- Detecting CXX compile features - done
+[0.591s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[0.811s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[0.990s] -- Found rclcpp: 28.1.21 (/opt/ros/jazzy/share/rclcpp/cmake)
+[1.096s] -- Found rosidl_generator_c: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[1.139s] -- Found rosidl_generator_cpp: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[1.184s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.239s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.412s] -- Found rmw_implementation_cmake: 7.3.3 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+[1.417s] -- Found rmw_fastrtps_cpp: 8.4.4 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+[1.598s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.13")  
+[1.655s] -- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+[1.754s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.954s] -- Found rclpy: 7.1.11 (/opt/ros/jazzy/share/rclpy/cmake)
+[1.964s] -- Found std_msgs: 5.3.8 (/opt/ros/jazzy/share/std_msgs/cmake)
+[2.008s] -- Found ament_lint_auto: 0.17.5 (/opt/ros/jazzy/share/ament_lint_auto/cmake)
+[2.252s] -- Added test 'flake8' to check Python code syntax and style conventions
+[2.252s] -- Configured 'flake8' exclude dirs and/or files: 
+[2.253s] -- Added test 'lint_cmake' to check CMake code style
+[2.254s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[2.256s] -- Added test 'xmllint' to check XML markup files
+[2.258s] -- Configuring done (2.2s)
+[2.263s] -- Generating done (0.0s)
+[2.268s] -- Build files have been written to: /home/mostafa/Downloads/amcl_ws/build/robot_gazebo
+[2.289s] Invoked command in '/home/mostafa/Downloads/amcl_ws/build/robot_gazebo' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/mostafa/Downloads/amcl_ws/src/robot_gazebo -DCMAKE_INSTALL_PREFIX=/home/mostafa/Downloads/amcl_ws/install/robot_gazebo
+[2.291s] Invoking command in '/home/mostafa/Downloads/amcl_ws/build/robot_gazebo': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/mostafa/Downloads/amcl_ws/build/robot_gazebo -- -j12 -l12
+[2.363s] Invoked command in '/home/mostafa/Downloads/amcl_ws/build/robot_gazebo' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/mostafa/Downloads/amcl_ws/build/robot_gazebo -- -j12 -l12
+[2.365s] Invoking command in '/home/mostafa/Downloads/amcl_ws/build/robot_gazebo': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/mostafa/Downloads/amcl_ws/build/robot_gazebo
+[2.374s] -- Install configuration: ""
+[2.374s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/launch
+[2.374s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/launch/gazebo.launch.py
+[2.374s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/worlds
+[2.375s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/worlds/my_world.sdf
+[2.375s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/urdf
+[2.375s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/urdf/robot.urdf
+[2.375s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/urdf/robot.gazebo.xacro
+[2.375s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/urdf/robot.urdf.xacro
+[2.376s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/meshes
+[2.376s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/meshes/lidar.STL
+[2.376s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/meshes/Caster_Wheel.stl
+[2.380s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/meshes/zed.stl
+[2.380s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/models
+[2.380s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/models/four_room_apartment
+[2.380s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/models/four_room_apartment/model.config
+[2.380s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/models/four_room_apartment/model.sdf
+[2.381s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/config
+[2.381s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/config/gz_bridge.yaml
+[2.383s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/ament_index/resource_index/package_run_dependencies/robot_gazebo
+[2.383s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/ament_index/resource_index/parent_prefix_path/robot_gazebo
+[2.383s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/environment/ament_prefix_path.sh
+[2.383s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/environment/ament_prefix_path.dsv
+[2.383s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/environment/path.sh
+[2.383s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/environment/path.dsv
+[2.383s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/local_setup.bash
+[2.384s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/local_setup.sh
+[2.384s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/local_setup.zsh
+[2.384s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/local_setup.dsv
+[2.384s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/package.dsv
+[2.384s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/ament_index/resource_index/packages/robot_gazebo
+[2.384s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/cmake/robot_gazeboConfig.cmake
+[2.384s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/cmake/robot_gazeboConfig-version.cmake
+[2.384s] -- Installing: /home/mostafa/Downloads/amcl_ws/install/robot_gazebo/share/robot_gazebo/package.xml
+[2.386s] Invoked command in '/home/mostafa/Downloads/amcl_ws/build/robot_gazebo' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/mostafa/Downloads/amcl_ws/build/robot_gazebo
