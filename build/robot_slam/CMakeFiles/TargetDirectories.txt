@@ -1,9 +1,0 @@
-/home/mostafa/Downloads/amcl_ws/build/robot_slam/CMakeFiles/uninstall.dir
-/home/mostafa/Downloads/amcl_ws/build/robot_slam/CMakeFiles/robot_slam_uninstall.dir
-/home/mostafa/Downloads/amcl_ws/build/robot_slam/CMakeFiles/test.dir
-/home/mostafa/Downloads/amcl_ws/build/robot_slam/CMakeFiles/edit_cache.dir
-/home/mostafa/Downloads/amcl_ws/build/robot_slam/CMakeFiles/rebuild_cache.dir
-/home/mostafa/Downloads/amcl_ws/build/robot_slam/CMakeFiles/list_install_components.dir
-/home/mostafa/Downloads/amcl_ws/build/robot_slam/CMakeFiles/install.dir
-/home/mostafa/Downloads/amcl_ws/build/robot_slam/CMakeFiles/install/local.dir
-/home/mostafa/Downloads/amcl_ws/build/robot_slam/CMakeFiles/install/strip.dir
