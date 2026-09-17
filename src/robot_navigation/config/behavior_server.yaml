@@ -1,0 +1,50 @@
+behavior_server:
+  ros__parameters:
+    use_sim_time: True
+
+    # Costmap and footprint topics (environment and robot shape)
+    local_costmap_topic: local_costmap/costmap_raw
+    local_footprint_topic: local_costmap/published_footprint
+    global_costmap_topic: global_costmap/costmap_raw
+    global_footprint_topic: global_costmap/published_footprint
+
+    cycle_frequency: 10.0   # How often behaviors are checked/updated (Hz)
+
+    # Recovery and assistance behaviors to load
+    behavior_plugins:
+      ["spin", "backup", "drive_on_heading", "wait", "assisted_teleop"]
+
+    spin:
+      plugin: "nav2_behaviors::Spin"
+      # Spin -> rotates the robot to help clear localization issues or find a new path
+
+    backup:
+      plugin: "nav2_behaviors::BackUp"
+      # BackUp -> moves the robot backward if it gets stuck in front of an obstacle
+
+    drive_on_heading:
+      plugin: "nav2_behaviors::DriveOnHeading"
+      # DriveOnHeading -> drives forward on a fixed heading, ignoring the global plan
+
+    wait:
+      plugin: "nav2_behaviors::Wait"
+      # Wait -> keeps the robot still for a defined time
+
+    assisted_teleop:
+      plugin: "nav2_behaviors::AssistedTeleop"
+      # AssistedTeleop -> a human takes partial control to guide the robot
+
+    # Frames
+    local_frame: odom
+    global_frame: map
+    robot_base_frame: base_footprint
+    transform_tolerance: 0.1
+
+    # Simulation and TurtleBot3 limits
+    simulate_ahead_time: 2.0  # How far ahead to simulate behavior
+    max_rotational_vel: 1.0   # Maximum spin speed (rad/s)
+    min_rotational_vel: 0.4   # Minimum spin speed (rad/s)
+    rotational_acc_lim: 3.2   # Angular acceleration limit
+
+    # Recovery motions use plain Twist too
+    enable_stamped_cmd_vel: false
