@@ -327,11 +327,6 @@ Every time the mission node advances to a new goal, it republishes the full
 [INFO] [waypoint_marker_publisher]: Reached Home
 [INFO] [waypoint_marker_publisher]: Mission complete. Returned to Home.
 ```
-
-> [FILL IN: replace with the exact full log copied from your terminal for
-> the run used in the demo video, including the `ros2 lifecycle get`
-> outputs showing `active` for each Nav2 node.]
-
 ---
 
 ## 13. Problems Encountered and Their Solutions
