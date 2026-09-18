@@ -210,9 +210,6 @@
     </inertial>
 </link>
 
-<!-- Made fixed: the swivel no longer rotates about Z. Only the roller
-     (caster_wheel_joint below) spins, about Y, the same way the two
-     rear wheels do. -->
 <joint name="caster_swivel_joint" type="fixed">
     <parent link="base_link"/>
     <child link="caster_swivel_link"/>
@@ -248,7 +245,7 @@
     <parent link="caster_swivel_link"/>
     <child link="caster_wheel"/>
     <origin xyz="0 0 ${-caster_swivel_drop}" rpy="0 0 0"/>
-    <!-- Axis adjusted to 0 1 0 to match visual alignment -->
+   
     <axis xyz="0 1 0"/>
 </joint>
 

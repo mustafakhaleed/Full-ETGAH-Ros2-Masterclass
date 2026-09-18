@@ -102,13 +102,7 @@ def generate_launch_description():
     ld.add_action(set_egl_vendor)
     ld.add_action(set_gz_ip)
 
-    # Add Launch Actions
-    # NOTE: warehouse_launch is included BEFORE set_gz_resource_path.
-    # warehouse_storage_launch.launch.py sets its own GZ_SIM_RESOURCE_PATH
-    # (overwriting, not appending). By adding our merged variable AFTER
-    # the include, our value (which already contains the warehouse paths
-    # too) is the one left in the environment when gz_gui_process and
-    # spawn_robot actually run.
+
     ld.add_action(warehouse_launch)
     ld.add_action(set_gz_resource_path)
     ld.add_action(gz_gui_process)
