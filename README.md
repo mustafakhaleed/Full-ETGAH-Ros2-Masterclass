@@ -370,7 +370,7 @@ All images referenced below are stored in `Images_Video/`.
 ## 15. Demonstration Video
 
 A complete narrated video demonstrating the project from start to finish
-(SLAM mapping, AMCL localization and recovery, Nav2 goal
+(SLAM mapping, AMCL localization ,Nav2 goal
 testing, the full autonomous mission, and the RViz waypoint markers
 updating throughout) is available here:
 
