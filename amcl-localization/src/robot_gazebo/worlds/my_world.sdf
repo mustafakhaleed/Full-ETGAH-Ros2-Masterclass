@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version="1.8">
+
+  <world name="First_world">
+
+    <!-- Plugins for gz user interface -->
+
+    <plugin
+      filename="gz-sim-physics-system"
+      name="gz::sim::systems::Physics">
+    </plugin>
+
+    <plugin
+      filename="gz-sim-user-commands-system"
+      name="gz::sim::systems::UserCommands">
+    </plugin>
+
+    <plugin
+      filename="gz-sim-scene-broadcaster-system"
+      name="gz::sim::systems::SceneBroadcaster">
+    </plugin>
+
+    <!-- URIs to official Gazebo Fuel URLs  -->
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Sun</uri>
+    </include>
+
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Ground Plane</uri>
+    </include>
+
+    <!-- Robot model including -->
+<!-- <include>
+  <uri>model://robot_gazebo/urdf/robot.urdf</uri>
+  <name>Eissa</name>
+  <pose>1 2 0.2 0 0 0</pose>
+</include> -->
+
+
+<!-- the 4 room apartment model including -->
+<include>
+  <uri>model://four_room_apartment</uri>
+  <pose>0 0 0 0 0 0</pose>
+</include>
+  </world>
+
+</sdf>
