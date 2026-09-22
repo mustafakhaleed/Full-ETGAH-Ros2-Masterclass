@@ -1,0 +1,107 @@
+# ================================================
+# Planner Server
+# ================================================
+planner_server:
+  ros__parameters:
+    use_sim_time: True
+
+    # Frequency at which the planner is expected to run (Hz)
+    expected_planner_frequency: 10.0
+
+    # List of planner plugins used by this server
+    planner_plugins: ["GridBased"]
+
+    # Maximum time (seconds) to wait for costmap updates before planning
+    costmap_update_timeout: 1.0
+
+    GridBased:
+      # The specific global planner plugin used
+      plugin: "nav2_navfn_planner::NavfnPlanner"
+
+      # How close the robot should get to the goal (meters)
+      tolerance: 0.5
+
+      # Planning algorithm choice: false = Dijkstra, true = A*
+      use_astar: false
+
+      # Allow planning through unknown areas of the map
+      allow_unknown: true
+
+
+# ================================================
+# Global Costmap
+# ================================================
+global_costmap:
+  global_costmap:
+    ros__parameters:
+      use_sim_time: True
+
+      
+      robot_radius: 0.28         # my Eissa robot radius 0.28
+
+      # Frequency to update the costmap (Hz)
+      update_frequency: 1.0
+
+      # Frequency to publish the costmap (Hz)
+      publish_frequency: 1.0
+
+      # Global frame for the costmap (map -> odom -> base_footprint)
+      global_frame: map
+
+      # Robot base frame
+      robot_base_frame: base_footprint
+
+      # Maximum allowed delay for transforms (seconds)
+      transform_tolerance: 0.5
+
+      # Costmap resolution in meters per cell (matches the saved map)
+      resolution: 0.05
+
+      # Track unknown areas of the map as part of the costmap
+      track_unknown_space: true
+
+      # Layers included in the costmap
+      plugins: ["static_layer", "obstacle_layer", "denoise_layer", "inflation_layer"]
+
+      # Obstacle Layer: adds dynamic obstacles detected by the LiDAR
+      obstacle_layer:
+        plugin: "nav2_costmap_2d::ObstacleLayer"
+        enabled: true
+        observation_sources: scan
+        scan:
+          topic: /scan
+          max_obstacle_height: 2.0
+          clearing: true            # Remove obstacles when no longer detected
+          marking: true             # Mark obstacles in the costmap
+          data_type: "LaserScan"
+          raytrace_max_range: 3.5   # TurtleBot3 LiDAR maximum range
+          raytrace_min_range: 0.0
+          obstacle_max_range: 3.0   # Max distance to mark as obstacle
+          obstacle_min_range: 0.0
+
+      # Static Layer: adds obstacles from the saved map
+      static_layer:
+        plugin: "nav2_costmap_2d::StaticLayer"
+        map_subscribe_transient_local: true
+        transform_tolerance: 0.1
+
+      # Denoise Layer: removes noise so single bad points are not obstacles
+      denoise_layer:
+        plugin: "nav2_costmap_2d::DenoiseLayer"
+        enabled: True
+
+      # Inflation Layer: safety buffer around obstacles
+      inflation_layer:
+        plugin: "nav2_costmap_2d::InflationLayer"
+        inflation_radius: 0.5  
+        cost_scaling_factor: 5.0  
+
+      always_send_full_costmap: true
+
+  global_costmap_client:
+    ros__parameters:
+      use_sim_time: True
+
+  global_costmap_rclcpp_node:
+    ros__parameters:
+      use_sim_time: True

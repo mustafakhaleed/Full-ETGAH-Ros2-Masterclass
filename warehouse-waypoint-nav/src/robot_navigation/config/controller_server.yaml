@@ -1,0 +1,147 @@
+controller_server:
+  ros__parameters:
+    use_sim_time: True
+
+    controller_frequency: 10.0   # How often control commands are published (Hz)
+
+    min_x_velocity_threshold: 0.001
+    min_y_velocity_threshold: 0.5
+    min_theta_velocity_threshold: 0.001
+
+    failure_tolerance: 0.3       # Allowed error before declaring failure
+
+    progress_checker_plugins: ["progress_checker"]   # note: plural, it is a list
+    goal_checker_plugins: ["goal_checker"]
+    controller_plugins: ["FollowPath"]
+
+    # --- Progress checker: makes sure the robot is actually moving ---
+    progress_checker:
+      plugin: "nav2_controller::SimpleProgressChecker"
+      required_movement_radius: 0.1
+      movement_time_allowance: 10.0
+
+    # --- Goal checker: defines how close is "good enough" ---
+    goal_checker:
+      stateful: True
+      plugin: "nav2_controller::SimpleGoalChecker"
+      xy_goal_tolerance: 0.25   # Distance tolerance to goal position (m)
+      yaw_goal_tolerance: 0.25  # Orientation tolerance (radians)
+
+    # --- Local Planner (DWB) tuned for TurtleBot3 Burger ---
+    FollowPath:
+      plugin: "dwb_core::DWBLocalPlanner"
+      debug_trajectory_details: True
+
+      min_vel_x: 0.0
+      max_vel_x: 0.22             # TurtleBot3 Burger maximum linear speed
+      min_vel_y: 0.0
+      max_vel_y: 0.0              # Differential drive: no sideways motion
+      max_vel_theta: 1.0          # Max angular speed (rad/s)
+      min_speed_xy: 0.0
+      max_speed_xy: 0.22
+      min_speed_theta: 0.0
+
+      acc_lim_x: 2.5              # Linear acceleration limit
+      acc_lim_y: 0.0
+      acc_lim_theta: 3.2          # Angular acceleration limit
+      decel_lim_x: -2.5
+      decel_lim_y: 0.0
+      decel_lim_theta: -3.2
+
+      vx_samples: 20              # Number of linear velocity samples
+      vy_samples: 0
+      vtheta_samples: 40          # Number of angular velocity samples
+
+      sim_time: 1.5               # How far ahead to simulate trajectories
+      linear_granularity: 0.05
+      angular_granularity: 0.025
+      xy_goal_tolerance: 0.05
+      transform_tolerance: 0.2
+      trans_stopped_velocity: 0.25
+      short_circuit_trajectory_evaluation: true
+      stateful: true
+
+      critics:                    # Criteria used to score each trajectory
+        [
+          "RotateToGoal",
+          "Oscillation",
+          "BaseObstacle",
+          "GoalAlign",
+          "PathAlign",
+          "PathDist",
+          "GoalDist",
+        ]
+      BaseObstacle.scale: 0.02
+      PathAlign.scale: 32.0
+      PathAlign.forward_point_distance: 0.1
+      GoalAlign.scale: 24.0
+      GoalAlign.forward_point_distance: 0.1
+      PathDist.scale: 32.0
+      GoalDist.scale: 24.0
+      RotateToGoal.scale: 32.0
+      RotateToGoal.slowing_factor: 5.0
+      RotateToGoal.lookahead_time: -1.0
+
+    # We use plain geometry_msgs/Twist, not TwistStamped.
+    # Must be false, and must match every other node in the chain.
+    enable_stamped_cmd_vel: false
+
+
+# --- Local Costmap (close surroundings of the robot) ---
+local_costmap:
+  local_costmap:
+    ros__parameters:
+      use_sim_time: True
+
+      robot_radius: 0.28         # my Eissa robot radius 0.28 
+
+      update_frequency: 5.0      # How often costmap updates (Hz)
+      publish_frequency: 2.0     # How often costmap publishes (Hz)
+
+      global_frame: odom         # Local costmap lives in odom, not map
+      robot_base_frame: base_footprint
+
+      rolling_window: true       # A moving window that follows the robot
+      width: 3                   # Local map width (meters)
+      height: 3                  # Local map height (meters)
+      resolution: 0.05           # Cell size (meters per pixel)
+      transform_tolerance: 0.5
+
+      plugins: ["obstacle_layer", "denoise_layer", "inflation_layer"]
+
+      # Obstacles detected by the LiDAR
+      obstacle_layer:
+        plugin: "nav2_costmap_2d::ObstacleLayer"
+        enabled: true
+        observation_sources: scan
+        scan:
+          topic: /scan
+          max_obstacle_height: 2.0
+          clearing: true
+          marking: true
+          data_type: "LaserScan"
+          raytrace_max_range: 3.5
+          raytrace_min_range: 0.0
+          obstacle_max_range: 3.0
+          obstacle_min_range: 0.0
+
+      # Safety buffer around obstacles
+      inflation_layer:
+        plugin: "nav2_costmap_2d::InflationLayer"
+        cost_scaling_factor: 5.0
+        inflation_radius: 0.5
+
+      # Removes noisy isolated readings
+      denoise_layer:
+        plugin: "nav2_costmap_2d::DenoiseLayer"
+        enabled: True
+
+      always_send_full_costmap: True
+
+  local_costmap_client:
+    ros__parameters:
+      use_sim_time: True
+
+  local_costmap_rclcpp_node:
+    ros__parameters:
+      use_sim_time: True

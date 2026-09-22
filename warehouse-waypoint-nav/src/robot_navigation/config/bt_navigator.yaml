@@ -1,0 +1,28 @@
+bt_navigator:
+  ros__parameters:
+    use_sim_time: True
+
+    # Frames
+    global_frame: map
+    robot_base_frame: base_footprint
+
+    # Topic used to read the current robot odometry
+    odom_topic: /odom
+
+    # How long the BT waits for a transform (seconds)
+    transform_tolerance: 0.5
+
+    # How often the behavior tree ticks (ms)
+    bt_loop_duration: 10
+
+    # Timeout for each server action call (ms)
+    default_server_timeout: 20
+
+    # Navigator plugins: single goal and waypoint following
+    navigators: ["navigate_to_pose", "navigate_through_poses"]
+
+    navigate_to_pose:
+      plugin: "nav2_bt_navigator::NavigateToPoseNavigator"
+
+    navigate_through_poses:
+      plugin: "nav2_bt_navigator::NavigateThroughPosesNavigator"
