@@ -1,0 +1,243 @@
+<?xml version="1.0"?>
+<robot name="Eissa" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!-- To use Mesh paths-->
+<xacro:arg name="mesh_path" default="package://my_robot_description/meshes/"/>
+
+<!-- Shared materials (declared once, referenced by name below) -->
+<material name="blue">
+    <color rgba="0 0 1 1"/>
+</material>
+<material name="black">
+    <color rgba="0 0 0 1"/>
+</material>
+<material name="gray">
+    <color rgba="0.5 0.5 0.5 1"/>
+</material>
+
+    <!--
+    wheel Dimensions-->
+<xacro:property name="Wheel_Rad" value="0.06"/>
+<xacro:property name="Wheel_Length" value="0.035"/>
+<xacro:property name = "wheel_mass" value = "0.1"/>
+
+<!--
+  Wheel position offsets from the center of the chassis. The offsets are defined in the chassis frame.
+-->
+<xacro:property name="wheel_x_offset" value="0.1"/>
+<xacro:property name="wheel_y_offset" value="0.165"/>
+<xacro:property name="wheel_z_offset" value="-0.015"/>
+
+<xacro:property name = "pi_value" value = "3.14159"/>
+<!-- chassis -->
+<xacro:property name = "chassis_mass" value = "0.6"/>
+
+<xacro:property name = "Chassis_x_size" value = "0.4"/>
+<xacro:property name = "Chassis_y_size" value = "0.3"/>
+<xacro:property name = "Chassis_z_size" value = "0.1"/>
+
+<!-- Sensor / accessory mount offsets, relative to the chassis frame -->
+<xacro:property name="lidar_x_offset" value="0.15"/>
+<xacro:property name="lidar_z_offset" value="0.0825"/>
+
+<xacro:property name="camera_x_offset" value="0.215"/>
+<xacro:property name="camera_z_offset" value="0.035"/>
+
+<xacro:property name="caster_x_offset" value="0.15"/>
+<xacro:property name="caster_z_offset" value="-0.03"/>
+<xacro:property name="caster_mesh_scale" value="3 3 3"/>
+<xacro:property name="caster_swivel_mass" value="0.01"/>
+<xacro:property name="caster_swivel_drop" value="0.02"/>
+
+<!-- Macro for wheels-->
+
+
+<link name="chassis">
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+            <box size="${Chassis_x_size} ${Chassis_y_size} ${Chassis_z_size}"/>
+        </geometry>
+        <material name="blue"/>
+    </visual>
+    <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+            <box size="${Chassis_x_size} ${Chassis_y_size} ${Chassis_z_size}"/>
+        </geometry>
+    </collision>
+    <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="${chassis_mass}"/>
+        <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+</link>
+
+<link name="base_footprint">
+</link>
+
+<joint name="base_footprint_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="chassis"/>
+    <origin xyz="0 0 0.1" rpy="0 0 0"/>
+</joint>
+
+
+
+<xacro:macro name="wheel_xacro" params="prefix x_reflect y_reflect">
+
+<link name = "${prefix}_wheel" >
+    <visual>
+        <origin xyz="0 0 0" rpy="${pi_value/2} 0 0 "/>
+        <geometry>
+            <cylinder radius="${Wheel_Rad}" length="${Wheel_Length}"/>
+        </geometry>
+        <material name="black"/>
+    </visual>
+    <collision>
+        <origin xyz="0 0 0" rpy="${pi_value/2} 0 0 "/>
+        <geometry>
+            <cylinder radius="${Wheel_Rad}" length="${Wheel_Length}"/>
+        </geometry>
+    </collision>
+    <inertial>
+        <origin xyz="0 0 0" rpy="${pi_value/2} 0 0"/>
+        <mass value="${wheel_mass}"/>
+        <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+</link>
+
+    <joint name = "${prefix}_wheel_joint" type="continuous">
+        <parent link="chassis"/>
+        <child link="${prefix}_wheel"/>
+        <origin xyz="${x_reflect * wheel_x_offset} ${y_reflect * wheel_y_offset} ${wheel_z_offset}" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+</xacro:macro>
+
+
+<xacro:wheel_xacro prefix="rear_left"   x_reflect="-1" y_reflect="1"/>
+<xacro:wheel_xacro prefix="rear_right"  x_reflect="-1" y_reflect="-1"/>
+
+
+<!-- Lidar and Camera meshes-->
+
+  <link name="lidar_link">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="$(arg mesh_path)lidar.STL"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <cylinder radius="0.06" length="0.04"/>
+    </geometry>
+  </collision>
+  <inertial>
+    <mass value="0.2"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
+             iyy="0.0001" iyz="0.0"
+             izz="0.0001"/>
+  </inertial>
+</link>
+
+<joint name="lidar_joint" type="fixed">
+  <parent link="chassis"/>
+  <child link="lidar_link"/>
+  <origin xyz="${lidar_x_offset} 0 ${lidar_z_offset}" rpy="0 0 0"/>
+</joint>
+
+
+<link name="camera_link">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="$(arg mesh_path)zed.stl"/>
+    </geometry>
+    <material name="gray"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.08 0.03 0.03"/>
+    </geometry>
+  </collision>
+  <inertial>
+    <mass value="0.1"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <inertia ixx="0.00005" ixy="0.0" ixz="0.0"
+             iyy="0.00005" iyz="0.0"
+             izz="0.00005"/>
+  </inertial>
+</link>
+
+<joint name="camera_joint" type="fixed">
+  <parent link="chassis"/>
+  <child link="camera_link"/>
+  <origin xyz="${camera_x_offset} 0 ${camera_z_offset}" rpy="0 0 0"/>
+</joint>
+
+<link name="camera_optical_link"/>
+
+<joint name="camera_optical_joint" type="fixed">
+  <parent link="camera_link"/>
+  <child link="camera_optical_link"/>
+  <origin xyz="0 0 0" rpy="${-pi_value/2} 0 ${-pi_value/2}"/>
+</joint>
+
+<!-- Caster wheel: real two-joint version. ( Cursor helped me as i did not know how to do it before) 
+     A caster physically needs two rotations, so it needs two links and
+     two joints in between (see the explanation below the code):
+       chassis, swivel joint (continuous, axis z), caster_swivel_link
+       caster_swivel_link, roll joint (continuous, axis y), caster_wheel_link (mesh)
+      -->
+
+<link name="caster_swivel_link">
+    <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="${caster_swivel_mass}"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+</link>
+
+<joint name="caster_swivel_joint" type="continuous">
+    <parent link="chassis"/>
+    <child link="caster_swivel_link"/>
+    <origin xyz="${caster_x_offset} 0 ${caster_z_offset}" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+</joint>
+
+ <link name="caster_wheel_link">
+    <visual>
+        <origin xyz="0 0 0" rpy="${-pi_value/2} 0 ${-pi_value/2}"/>
+        <geometry>
+      <mesh filename="$(arg mesh_path)Caster_Wheel.stl"
+      scale="${caster_mesh_scale}"/>
+        </geometry>
+        <material name="black"/>
+    </visual>
+    <collision>
+        <origin xyz="0 0 0" rpy="${pi_value/2} 0 0"/>
+        <geometry>
+            <cylinder radius="0.03" length="0.02"/>
+        </geometry>
+    </collision>
+    <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="0.05"/>
+        <inertia ixx="1e-5" ixy="0" ixz="0" iyy="1e-5" iyz="0" izz="1e-5"/>
+    </inertial>
+ </link>
+
+ <joint name = "caster_wheel_joint" type="continuous">
+    <parent link="caster_swivel_link"/>
+    <child link="caster_wheel_link"/>
+    <origin xyz="0 0 ${-caster_swivel_drop}" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+ </joint>
+
+</robot>
