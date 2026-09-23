@@ -39,7 +39,7 @@
   <img src="./Images/FULL.png" alt="Full view of Scrappy, the completed differential-drive robot" width="520">
 
 
-> *Nine repositories. One robot. Zero CAD files. This is the record of how a Python distance sensor became an autonomous warehouse robot that finds its own way home.*
+> *Nine repositories. One robot. Zero CAD files.*
 
 ## 🎬 Demo
 
