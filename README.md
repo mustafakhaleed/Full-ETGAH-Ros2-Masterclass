@@ -31,9 +31,6 @@
   <a href="#problems-encountered">Troubleshooting log</a>
 </p>
 
-<p align="center">
-  <img src="./scrappy.svg" alt="Scrappy — the differential-drive robot built from open-source LiDAR, camera, and caster-wheel meshes" width="420">
-</p>
 
 <p align="center">
   <img src="./Images/FULL.png" alt="Full view of Scrappy, the completed differential-drive robot" width="520">
