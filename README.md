@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./Images/LOGO.png" alt="Project logo" width="450">
+  <img src="./Images/LOGO.png" alt="Project logo" width="600">
 </p>
 
 <h1 align="center">Full Etgah ROS2 Masterclass</h1>
